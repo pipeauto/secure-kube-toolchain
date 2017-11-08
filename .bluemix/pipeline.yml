@@ -69,9 +69,10 @@ stages:
       set +x
       bx cr image-inspect ${REGISTRY_URL}/${REGISTRY_NAMESPACE}/${IMAGE_NAME}:${BUILD_NUMBER}
 
-      # The image URL will automatically be passed along with the build result as env variable PIPELINE_IMAGE_URL to
-      # any subsequent job consuming this build result. 
-      # Uncomment and modify the environment variable $PIPELINE_IMAGE_URL to pass along a different image URL than the one inferred by the pipeline:
+      # When 'bx' commands are in the pipeline job config directly, the image URL will automatically be passed 
+      # along with the build result as env variable PIPELINE_IMAGE_URL to any subsequent job consuming this build result. 
+      # When the job is sourc'ing an external shell script, or to pass a different image URL than the one inferred by the pipeline,
+      # please uncomment and modify the environment variable the following line.
       # export PIPELINE_IMAGE_URL="$REGISTRY_URL/$REGISTRY_NAMESPACE/$IMAGE_NAME:$BUILD_NUMBER"
 
       ######################################################################################
@@ -122,7 +123,11 @@ stages:
       set +e
       bx cr va ${PIPELINE_IMAGE_URL}
       set -e
+<<<<<<< HEAD
       [[ $(bx cr va ${PIPELINE_IMAGE_URL}}) == *SAFE\ to\ deploy* ]] || { echo "ERROR: The vulnerability scan was not successful, check the output of the command and try again."; exit 1; }
+=======
+      [[ $(bx cr va ${PIPELINE_IMAGE_URL}) == *SAFE\ to\ deploy* ]] || { echo "ERROR: The vulnerability scan was not successful, check the output of the command and try again."; exit 1; }
+>>>>>>> d05c5a94a766944b436f25372621e28a1549e1e9
 - name: DEPLOY
   inputs:
   - type: job
