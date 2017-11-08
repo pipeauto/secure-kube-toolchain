@@ -123,11 +123,7 @@ stages:
       set +e
       bx cr va ${PIPELINE_IMAGE_URL}
       set -e
-<<<<<<< HEAD
-      [[ $(bx cr va ${PIPELINE_IMAGE_URL}}) == *SAFE\ to\ deploy* ]] || { echo "ERROR: The vulnerability scan was not successful, check the output of the command and try again."; exit 1; }
-=======
       [[ $(bx cr va ${PIPELINE_IMAGE_URL}) == *SAFE\ to\ deploy* ]] || { echo "ERROR: The vulnerability scan was not successful, check the output of the command and try again."; exit 1; }
->>>>>>> d05c5a94a766944b436f25372621e28a1549e1e9
 - name: DEPLOY
   inputs:
   - type: job
